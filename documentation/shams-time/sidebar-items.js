@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ShamsTime","A Collection of times of interest"],["ShamsTimeSpec","Environment and Calculation Specification."]]});
