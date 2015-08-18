@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-994' class='srclink' href='../src/shams_time/lib.rs.html#128-132' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1575' class='srclink' href='../src/shams_time/lib.rs.html#187-191' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct ShamsTimeSpec {
     // some fields omitted
 }</pre><div class='docblock'><p>Environment and Calculation Specification.</p>
@@ -100,7 +100,7 @@ cities with the same name exist, include the name of the
 country. For Example, the strings &quot;Al-Quds&quot;, 
 &quot;Al-Quds, Palestine&quot;, &quot;القدس&quot;, and &quot;القدس، فلسطين&quot; are all
 equivalent and will set the same value. </p>
-</div><h4 id='method.method' class='method'><code>fn <a href='#method.method' class='fnname'>method</a>(&amp;mut self, id: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
+</div><h4 id='method.method' class='method'><code>fn <a href='#method.method' class='fnname'>method</a>(&amp;mut self, id: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>Sets the method for calculating prayer times.</p>
 </div><h4 id='method.coordinates' class='method'><code>fn <a href='#method.coordinates' class='fnname'>coordinates</a>(&amp;mut self, lat: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, lon: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>Sets latitude and longitude locations.</p>
@@ -118,14 +118,14 @@ are in millibars.</p>
 <div class='docblock'><p>Sets the state of daylight saving time.</p>
 </div><h4 id='method.today' class='method'><code>fn <a href='#method.today' class='fnname'>today</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>Sets date of interest to today.</p>
-</div><h4 id='method.date' class='method'><code>fn <a href='#method.date' class='fnname'>date</a>(&amp;mut self, day: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, month: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
+</div><h4 id='method.date' class='method'><code>fn <a href='#method.date' class='fnname'>date</a>(&amp;mut self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, month: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, day: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>Arbitrary date in discrete integers</p>
 
 <p>Ranges are inclusive:
 - <code>day</code> range is [1, 31]
 - <code>month</code> range: [1, 12]
 - <code>year</code> is the common 4 digit representation.</p>
-</div><h4 id='method.unix_date' class='method'><code>fn <a href='#method.unix_date' class='fnname'>unix_date</a>(&amp;mut self, _: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
+</div><h4 id='method.unix_date' class='method'><code>fn <a href='#method.unix_date' class='fnname'>unix_date</a>(&amp;mut self, _: <a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>Sets the date from a UNIX time stamp. Currently not implemented.</p>
 </div><h4 id='method.fajr_angle' class='method'><code>fn <a href='#method.fajr_angle' class='fnname'>fajr_angle</a>(&amp;mut self, degrees: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>Sets the fajr angle in degrees.</p>
@@ -145,7 +145,11 @@ are in millibars.</p>
 <div class='docblock'><p>Calculates the times of interest based on the supplied
 information. The specification object can be reused post
 calculation.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
+</div><h4 id='method.year' class='method'><code>fn <a href='#method.year' class='fnname'>year</a>(&amp;self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='struct' href='../shams_time/struct.YearIter.html' title='shams_time::YearIter'>YearIter</a></code></h4>
+<div class='docblock'><p>4 digit year</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ShamsTime","A Collection of times of interest"],["ShamsTimeSpec","Environment and Calculation Specification."]]});
+initSidebarItems({"struct":[["Date",""],["ShamsTime","A Collection of times of interest"],["ShamsTimeSpec","Environment and Calculation Specification."],["YearIter","Iterates over all days of a given year."]]});
