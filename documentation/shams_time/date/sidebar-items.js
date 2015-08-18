@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Date",""]]});
+initSidebarItems({"struct":[["Date","A basic structure to hold the year, month, and day expressed as 16-bit unisigned integers."]]});
