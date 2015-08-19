@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-1575' class='srclink' href='../src/shams_time/lib.rs.html#125-129' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2373' class='srclink' href='../src/shams_time/lib.rs.html#116-120' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct ShamsTimeSpec {
     // some fields omitted
 }</pre><div class='docblock'><p>Environment and Calculation Specification.</p>
@@ -169,8 +169,8 @@ arguments.</p>
 - <code>day</code> range is [1, 31]
 - <code>month</code> range: [1, 12]
 - <code>year</code> is the common 4 digit representation.</p>
-</div><h4 id='method.posix_date' class='method'><code>fn <a href='#method.posix_date' class='fnname'>posix_date</a>(&amp;mut self, ts: <a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
-<div class='docblock'><p>Sets the date to the date defined by a UNIX time stamp.</p>
+</div><h4 id='method.unix_date' class='method'><code>fn <a href='#method.unix_date' class='fnname'>unix_date</a>(&amp;mut self, ts: <a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
+<div class='docblock'><p>Sets the date to the date defined by a time stamp.</p>
 </div><h4 id='method.fajr_angle' class='method'><code>fn <a href='#method.fajr_angle' class='fnname'>fajr_angle</a>(&amp;mut self, degrees: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>Sets the Fajr angle in degrees.</p>
 
@@ -195,11 +195,11 @@ arguments.</p>
 <div class='docblock'><p>(used for extreme methods: refer to ITL&#39;s documentation)</p>
 </div><h4 id='method.extreme' class='method'><code>fn <a href='#method.extreme' class='fnname'>extreme</a>(&amp;mut self, extreme: <a href='http://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>) -&gt; &amp;mut <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>
 <div class='docblock'><p>(used for extreme methods: refer to ITL&#39;s documentation)</p>
-</div><h4 id='method.calculate' class='method'><code>fn <a href='#method.calculate' class='fnname'>calculate</a>(&amp;self) -&gt; <a class='struct' href='../shams_time/struct.ShamsTime.html' title='shams_time::ShamsTime'>ShamsTime</a></code></h4>
+</div><h4 id='method.calculate' class='method'><code>fn <a href='#method.calculate' class='fnname'>calculate</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../shams_time/struct.ShamsTime.html' title='shams_time::ShamsTime'>ShamsTime</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 <div class='docblock'><p>Calculates the times of interest based on the supplied
 information. The specification object can be reused post
 calculation.</p>
-</div><h4 id='method.year' class='method'><code>fn <a href='#method.year' class='fnname'>year</a>(&amp;self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='struct' href='../shams_time/struct.YearIter.html' title='shams_time::YearIter'>YearIter</a></code></h4>
+</div><h4 id='method.year' class='method'><code>fn <a href='#method.year' class='fnname'>year</a>(&amp;self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../shams_time/struct.YearIter.html' title='shams_time::YearIter'>YearIter</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator that produces a ShamsTime for each day
 of the specified year.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../shams_time/struct.ShamsTimeSpec.html' title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></code></h4>

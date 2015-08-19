@@ -45,9 +45,8 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/shams_time/lib.rs.html#27-553' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'><p>Islamic prayer times and other times that occur throughout a
-24-hour cycle.</p>
+        </span><a id='src-0' class='srclink' href='../src/shams_time/lib.rs.html#19-725' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Islamic prayer times and other solar temporal events</p>
 
 <h2 id="posix-time-and-utc" class='section-header'><a
                            href="#posix-time-and-utc">POSIX Time and UTC</a></h2>
@@ -57,8 +56,8 @@ durations - for both myself and the user - by deferring the
 handling of leap seconds and synchronization with UTC to the host
 system.</p>
 
-<p>For the most use cases, the distinction between UTC and POSIX
-time is not significant enough to warren consideration.</p>
+<p>For most use cases, the distinction between UTC and POSIX
+time is not significant enough to warrant consideration.</p>
 
 <h2 id="extreme-methods" class='section-header'><a
                            href="#extreme-methods">Extreme Methods</a></h2>
@@ -102,8 +101,17 @@ along with this program.  If not, see <a href="http://www.gnu.org/licenses/">htt
                         <td><a class='struct' href='struct.Date.html'
                                title='shams_time::Date'>Date</a></td>
                         <td class='docblock short'>
-                             <p>A basic structure to hold the year, month, and day expressed
-as 16-bit unisigned integers.</p>
+                             <p>A unit structure to hold the year, month, and day expressed
+as 16-bit unsigned integers.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Duration.html'
+                               title='shams_time::Duration'>Duration</a></td>
+                        <td class='docblock short'>
+                             <p>A unit <code>i64</code> wrapper that represents duration expressed using Unix time.</p>
 
                         </td>
                     </tr>
@@ -122,6 +130,15 @@ as 16-bit unisigned integers.</p>
                                title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></td>
                         <td class='docblock short'>
                              <p>Environment and Calculation Specification.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Time.html'
+                               title='shams_time::Time'>Time</a></td>
+                        <td class='docblock short'>
+                             <p>A unit <code>i64</code> wrapper that represents Unix time.</p>
 
                         </td>
                     </tr>
