@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `shams_time` crate.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, shams_time">
+    <meta name="description" content="API documentation for the Rust `shams` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, shams">
 
-    <title>shams_time - Rust</title>
+    <title>shams - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'></p><script>window.sidebarCurrent = {name: 'shams_time', ty: 'mod', relpath: '../'};</script>
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'shams', ty: 'mod', relpath: '../'};</script>
     </section>
 
     <nav class="sub">
@@ -41,11 +41,11 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>shams_time</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>shams</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/shams_time/lib.rs.html#19-725' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/shams/lib.rs.html#44-750' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Islamic prayer times and other solar temporal events</p>
 
 <h2 id="posix-time-and-utc" class='section-header'><a
@@ -89,7 +89,7 @@ along with this program.  If not, see <a href="http://www.gnu.org/licenses/">htt
 <table>
                     <tr class=' module-item'>
                         <td><a class='mod' href='examples/index.html'
-                               title='shams_time::examples'>examples</a></td>
+                               title='shams::examples'>examples</a></td>
                         <td class='docblock short'>
                              <p>Illustrative examples of using this library.</p>
 
@@ -99,7 +99,7 @@ along with this program.  If not, see <a href="http://www.gnu.org/licenses/">htt
 <table>
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Date.html'
-                               title='shams_time::Date'>Date</a></td>
+                               title='shams::Date'>Date</a></td>
                         <td class='docblock short'>
                              <p>A unit structure to hold the year, month, and day expressed
 as 16-bit unsigned integers.</p>
@@ -109,7 +109,7 @@ as 16-bit unsigned integers.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Duration.html'
-                               title='shams_time::Duration'>Duration</a></td>
+                               title='shams::Duration'>Duration</a></td>
                         <td class='docblock short'>
                              <p>A unit <code>i64</code> wrapper that represents duration expressed using Unix time.</p>
 
@@ -117,8 +117,8 @@ as 16-bit unsigned integers.</p>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='struct' href='struct.ShamsTime.html'
-                               title='shams_time::ShamsTime'>ShamsTime</a></td>
+                        <td><a class='struct' href='struct.ShamsDay.html'
+                               title='shams::ShamsDay'>ShamsDay</a></td>
                         <td class='docblock short'>
                              <p>A Collection of times of interest for a specific date</p>
 
@@ -126,8 +126,8 @@ as 16-bit unsigned integers.</p>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='struct' href='struct.ShamsTimeSpec.html'
-                               title='shams_time::ShamsTimeSpec'>ShamsTimeSpec</a></td>
+                        <td><a class='struct' href='struct.ShamsSpec.html'
+                               title='shams::ShamsSpec'>ShamsSpec</a></td>
                         <td class='docblock short'>
                              <p>Environment and Calculation Specification.</p>
 
@@ -136,7 +136,7 @@ as 16-bit unsigned integers.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Time.html'
-                               title='shams_time::Time'>Time</a></td>
+                               title='shams::Time'>Time</a></td>
                         <td class='docblock short'>
                              <p>A unit <code>i64</code> wrapper that represents Unix time.</p>
 
@@ -145,10 +145,10 @@ as 16-bit unsigned integers.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.YearIter.html'
-                               title='shams_time::YearIter'>YearIter</a></td>
+                               title='shams::YearIter'>YearIter</a></td>
                         <td class='docblock short'>
                              <p>Iterates over every day of a given year, yielding a
-ShamsTime object for each day. </p>
+ShamsDay object for each day. </p>
 
                         </td>
                     </tr>
@@ -196,7 +196,7 @@ ShamsTime object for each day. </p>
 
     <script>
         window.rootPath = "../";
-        window.currentCrate = "shams_time";
+        window.currentCrate = "shams";
         window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
