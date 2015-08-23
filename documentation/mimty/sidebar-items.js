@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["blob","Attempt to identify a binary blob by its content"],["file","Attempt to identify a file by its extension and contents"]],"mod":[["ffi","C function interface for this library"]],"type":[["MimeType","Result of the file identification attempt"]]});

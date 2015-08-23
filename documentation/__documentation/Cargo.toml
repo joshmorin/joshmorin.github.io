@@ -1,0 +1,17 @@
+[package]
+name = "documentation"
+version = "0.1.0"
+authors = ["Josh Morin <JoshMorin@gmx.com>"]
+
+[dependencies.moid]
+name = "moid"
+git = "https://joshmorin@bitbucket.org/joshmorin/moid.git"
+
+[dependencies.shams]
+name = "shams"
+git = "https://joshmorin@bitbucket.org/joshmorin/shams.git"
+
+[dependencies.mimty]
+name = "mimty"
+git = "https://joshmorin@bitbucket.org/joshmorin/mimty.git"
+
