@@ -55,7 +55,7 @@ dependencies = [
 [[package]]
 name = "shams"
 version = "0.7.0"
-source = "git+https://joshmorin@bitbucket.org/joshmorin/shams.git#91d08efa5154d3bb24b2580b0b914fe7a2f5b521"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/shams.git#dbcafeb44f82a3ab1c49df1a9b9f3745914f9abb"
 dependencies = [
  "gcc 0.3.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",

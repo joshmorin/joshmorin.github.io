@@ -351,72 +351,6 @@
 <span id="309">309</span>
 <span id="310">310</span>
 <span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
-<span id="315">315</span>
-<span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-<span id="355">355</span>
-<span id="356">356</span>
-<span id="357">357</span>
-<span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
-<span id="369">369</span>
-<span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
-<span id="374">374</span>
-<span id="375">375</span>
-<span id="376">376</span>
-<span id="377">377</span>
 </pre><pre class='rust '>
 <span class='comment'>/*
     Moid: Cancelable, Detached Loops and Scheduling
@@ -548,7 +482,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```no_test</span>
-    <span class='doccomment'>///     sssssssssss|wwwww|sssssssssss|wwwww|...</span>
+    <span class='doccomment'>///     wwwww|sssssssssss|wwwww|sssssssssss|...</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>///</span>
@@ -658,9 +592,16 @@
                 }
             }
             <span class='kw'>loop</span> { <span class='comment'>//:‎ الحلقة الرئيسية</span>
-                <span class='kw'>let</span> <span class='ident'>start_time</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>precise_time_s</span>();
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>start_time</span>;
                 
-                <span class='kw'>if</span> <span class='ident'>inc</span> {<span class='ident'>work</span>();} <span class='comment'>//:‎ ‫إذا كانت بداية فترة الإنتظار مع تنفيذ الحمولة</span>
+                <span class='kw'>if</span> <span class='ident'>inc</span> {    <span class='comment'>//:‎ ‫إذا كانت بداية فترة الإنتظار مع تنفيذ الحمولة</span>
+                    <span class='ident'>start_time</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>precise_time_s</span>();
+                    <span class='ident'>work</span>();
+                }
+                <span class='kw'>else</span> {      <span class='comment'>//:‎ ‫إذا كانت بداية فترة الإنتظار بعد تنفيذ الحمولة</span>
+                    <span class='ident'>work</span>();                    
+                    <span class='ident'>start_time</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>precise_time_s</span>();
+                }
                 
                 <span class='comment'>//:‎ ‫حلقة المهلة التي تفصل بين التكرار (sleep)</span>
                 <span class='kw'>loop</span> {
@@ -680,8 +621,6 @@
                     
                     <span class='ident'>thread</span>::<span class='ident'>park_timeout_ms</span>((<span class='ident'>delta</span><span class='op'>*</span><span class='number'>1000.0</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
                 }
-                
-                <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>inc</span> {<span class='ident'>work</span>();} <span class='comment'>//:‎ ‫إذا كانت بداية فترة الإنتظار بعد تنفيذ الحمولة</span>
                 
                 <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>count</span>) <span class='op'>=</span> <span class='ident'>count</span> {
                     <span class='ident'>current_count</span> <span class='op'>+=</span> <span class='number'>1</span>;
@@ -712,10 +651,10 @@
     <span class='ident'>MoidSpec</span>::<span class='ident'>new</span>().<span class='ident'>count</span>(<span class='ident'>count</span>).<span class='ident'>sleep</span>(<span class='ident'>sleep</span>).<span class='ident'>repeat</span>(<span class='ident'>work</span>)
 }
 <span class='doccomment'>/// ‎‫نفذ الدالة `work` في خيط منفصل بعد `delay` ثانية.</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>delay</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>delay</span>: <span class='ident'>f64</span>, <span class='ident'>work</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>MoidHandle</span>, <span class='ident'>String</span><span class='op'>&gt;</span> 
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>delay</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>delay</span>: <span class='ident'>i64</span>, <span class='ident'>work</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>MoidHandle</span>, <span class='ident'>String</span><span class='op'>&gt;</span> 
 <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnMut</span>(), 
       <span class='ident'>F</span>: <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span> {
-    <span class='ident'>MoidSpec</span>::<span class='ident'>new</span>().<span class='ident'>count</span>(<span class='number'>1</span>).<span class='ident'>sleep</span>(<span class='ident'>delay</span>).<span class='ident'>repeat</span>(<span class='ident'>work</span>)
+    <span class='ident'>MoidSpec</span>::<span class='ident'>new</span>().<span class='ident'>count</span>(<span class='number'>1</span>).<span class='ident'>delay</span>(<span class='ident'>delay</span>).<span class='ident'>repeat</span>(<span class='ident'>work</span>)
 }
 <span class='doccomment'>/// ‎‫كرر تنفيذ الدالة `work` في خيط منفصل.</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>spin</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>work</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>MoidHandle</span>, <span class='ident'>String</span><span class='op'>&gt;</span> 
@@ -724,77 +663,6 @@
     <span class='ident'>MoidSpec</span>::<span class='ident'>new</span>().<span class='ident'>repeat</span>(<span class='ident'>work</span>)
 }
 
-
-<span class='comment'>/*
-pub fn repeat_s&lt;F&gt;(from: Option&lt;i64&gt;, to: Option&lt;i64&gt;, sleep: f64, inc: bool, work: F) -&gt; Result&lt;MoidHandle, String&gt; 
-where F: FnMut(), 
-      F: Send + &#39;static {
-    repeat_sc(from, to, None, sleep, inc, work, || ())
-}
-
-
-pub fn repeat&lt;F&gt;(s: f64, inclusive: bool, work: F) -&gt; Result&lt;MoidHandle, String&gt; 
-where F: FnMut(), 
-      F: Send + &#39;static {
-    repeat_c(s, inclusive, work, || ())
-}
-
-pub fn repeat_c&lt;F, C&gt;(s: f64, inclusive: bool, work: F, cleanup: C) -&gt; Result&lt;MoidHandle, String&gt; 
-where F: FnMut(), 
-      F: Send + &#39;static,
-      C: FnOnce(), 
-      C: Send + &#39;static  {
-    
-    use time;
-    
-    //:‎ ‫أظول فترة أنتظار محدودة بسعة مدخلات park_timeout_ms والذي
-    //:‎ ‫يستقبل مدة الإنتظار بالملي-ثانية ونوعه u32؛ أي أطول مدة ممكنة 
-    //:‎ ‫هي شهرين. MAX_TIME نصف هذه المدة.
-    const MAX_TIME: f64 = 2592000.0;
-    //:‎ ‫ ‎القناة المستخدمة للإرسال إشارة الإنهاء لخيط تفيذ الحمولة
-    let (tx, rx) = mpsc::channel::&lt;()&gt;();
-    let sleep_time = s;
-    let mut work = work;
-    
-    if sleep_time &gt;= MAX_TIME { 
-        return Err(format!(concat!(&quot;Maximum wait time is one month &quot;,
-                            &quot;({:.02} seconds), {} seconds &quot;,
-                            &quot;specified.&quot;), MAX_TIME, sleep_time));
-    }
-    
-    let join_handle = thread::spawn(move || {
-        loop {
-            let start_time = time::precise_time_s();
-            
-            //:‎ ‫إذا كانت بداية فترة الإنتظار مع تنفيذ الحمولة
-            if inclusive {work();}
-            
-            //:‎ ‫حلقة الإنتظار
-            loop {
-                //:‎ ‫أنهي الخيط إذا استلمت الإشارة
-                if let Ok(_) = rx.try_recv() {
-                    cleanup();
-                    return;
-                }
-                //:‎ ‫فرق المدة (قيمة سالبة تفيد انقضاء المدة)
-                let delta = (start_time+sleep_time)-time::precise_time_s();
-                if delta &lt;= 0.0 {
-                    break;
-                }
-                else {
-                    thread::park_timeout_ms((delta*1000.0) as u32);
-                }
-            }
-            //:‎ ‫إذا كانت بداية فترة الإنتظار بعد تنفيذ الحمولة
-            if !inclusive {work();}
-        }
-    });
-    Ok(MoidHandle {
-        join_handle: join_handle,
-        signal_tx: tx
-    })
-}
-*/</span>
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

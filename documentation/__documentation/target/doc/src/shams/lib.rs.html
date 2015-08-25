@@ -774,6 +774,7 @@
 <span id="732">732</span>
 <span id="733">733</span>
 <span id="734">734</span>
+<span id="735">735</span>
 </pre><pre class='rust '>
 <span class='comment'>/*
     Shams: Islamic prayer times and other solar temporal events
@@ -828,10 +829,11 @@
 <span class='doccomment'>//! handling of leap seconds and synchronization with UTC to the host</span>
 <span class='doccomment'>//! system.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! The unix timestamp is defined as the number of seconds that </span>
+<span class='doccomment'>//! The UNIX timestamp is defined as the number of seconds that </span>
 <span class='doccomment'>//! have elapsed since the epoch (1970-01-01T00:00:00Z - Note </span>
-<span class='doccomment'>//! the timezone), not counting the leap seconds. As a coloray, </span>
-<span class='doccomment'>//! this library does not support dates that predate the epoch. </span>
+<span class='doccomment'>//! the timezone), not counting the leap seconds. As a corollary, </span>
+<span class='doccomment'>//! this library does not support dates that predate the epoch, </span>
+<span class='doccomment'>//! and the user is responsible for timezone and DST adjustments.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! For most use cases, the distinction between UTC and POSIX</span>
 <span class='doccomment'>//! time is not significant enough to warrant consideration.</span>
