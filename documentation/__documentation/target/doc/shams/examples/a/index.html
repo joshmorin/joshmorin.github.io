@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-2376' class='srclink' href='../../../src/shams/examples/a.rs.html#22-44' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2400' class='srclink' href='../../../src/shams/examples/a.rs.html#22-44' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>The time between Al-Fajr and true midnight</p>
 <pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>shams</span>;
@@ -55,9 +55,9 @@
  
     <span class='comment'>// Specify location and calculation details</span>
     <span class='kw'>let</span> <span class='ident'>day</span> <span class='op'>=</span> <span class='ident'>ShamsSpec</span>::<span class='ident'>new</span>().<span class='ident'>coordinates</span>(<span class='number'>31.77802</span>, <span class='number'>35.23532</span>)
-                                  .<span class='ident'>timezone</span>(<span class='number'>2.0</span>).<span class='ident'>temperature</span>(<span class='number'>17.5</span>)
-                                  .<span class='ident'>pressure</span>(<span class='number'>1010.0</span>).<span class='ident'>method</span>(<span class='number'>1</span>)
+                                  .<span class='ident'>temperature</span>(<span class='number'>17.5</span>).<span class='ident'>method</span>(<span class='number'>1</span>)
                                   .<span class='ident'>elevation</span>(<span class='number'>720.00</span>).<span class='ident'>today</span>()
+                                  .<span class='ident'>pressure</span>(<span class='number'>1010.0</span>)
                                   .<span class='ident'>calculate</span>().<span class='ident'>unwrap</span>();
  
     <span class='comment'>// Get true midnight and Al-fajr, if posible.</span>

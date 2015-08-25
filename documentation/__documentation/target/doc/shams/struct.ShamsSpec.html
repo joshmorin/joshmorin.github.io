@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-2387' class='srclink' href='../src/shams/lib.rs.html#141-145' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2411' class='srclink' href='../src/shams/lib.rs.html#144-148' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct ShamsSpec {
     // some fields omitted
 }</pre><div class='docblock'><p>Environment and Calculation Specification.</p>
@@ -66,9 +66,7 @@ correct times of interest.</p>
 
 <ol>
 <li>Prayer time Calculation Methods</li>
-<li>Timezone</li>
 <li>Date</li>
-<li>DST state</li>
 </ol></li>
 <li><p><strong>Extended Method Details</strong></p></li>
 </ol>
@@ -86,8 +84,8 @@ and time of year. For the eastern coast of Arabia, pressure can
 range from &lt;<code>1000</code> millibars up to around <code>1020</code>. The standard 
 value is <code>1010.0</code>.</p>
 
-<p>Elevation, temperature, location coordinates, Time zone, and DST 
-can all be determined with a quick web search.</p>
+<p>Elevation, temperature, and location coordinates can all be 
+determined with a quick web search.</p>
 
 <p>Which method to use varies from one region to another. If you 
 don&#39;t care about the correctness of prayer times, you can set 
@@ -100,9 +98,10 @@ can be used to infer times.</p>
 <p>Converting this object without specifying all the required 
 information will yield incorrect results.</p>
 </div><h4 id='method.city' class='method'><code>fn <a href='#method.city' class='fnname'>city</a>(name: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a>&gt;</code></h4>
-<div class='docblock'><p>Attempts to set method, latitude, longitude, elevation, pressure
-and timezone. This deviates from the builder pattern because 
-only a small set of cities have these values defined.</p>
+<div class='docblock'><p>Attempts to set method, latitude, longitude, elevation, and
+pressure/. This function&#39;s behaviour deviates from the 
+builder pattern because only a small set of cities have 
+these values defined.</p>
 
 <p>City names may be supplied in Arabic or English. If multiple 
 cities with the same name exist, include the name of the 
@@ -144,11 +143,6 @@ bug tracker. Thank you.</p>
 </code></pre>
 </div><h4 id='method.coordinates' class='method'><code>fn <a href='#method.coordinates' class='fnname'>coordinates</a>(&amp;mut self, lat: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, lon: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
 <div class='docblock'><p>Sets latitude and longitude locations.</p>
-</div><h4 id='method.timezone' class='method'><code>fn <a href='#method.timezone' class='fnname'>timezone</a>(&amp;mut self, offset: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
-<div class='docblock'><p>Sets the GMT/UTC offset to <code>offset</code>.</p>
-
-<p>All passed to this object or resulting objects should be 
-relative to this offset.</p>
 </div><h4 id='method.temperature' class='method'><code>fn <a href='#method.temperature' class='fnname'>temperature</a>(&amp;mut self, celsius: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
 <div class='docblock'><p>Sets the temperature to <code>celsius</code>. Temperature values are in
 Celsius.</p>
@@ -157,10 +151,8 @@ Celsius.</p>
 are in millibars.</p>
 </div><h4 id='method.elevation' class='method'><code>fn <a href='#method.elevation' class='fnname'>elevation</a>(&amp;mut self, meters: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
 <div class='docblock'><p>Sets the elevation to <code>meters</code> meters above sea level.</p>
-</div><h4 id='method.dst' class='method'><code>fn <a href='#method.dst' class='fnname'>dst</a>(&amp;mut self, enable: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
-<div class='docblock'><p>Sets the state of daylight saving time.</p>
 </div><h4 id='method.today' class='method'><code>fn <a href='#method.today' class='fnname'>today</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
-<div class='docblock'><p>Sets date of interest to today.</p>
+<div class='docblock'><p>Sets date of interest as today according to local time.</p>
 </div><h4 id='method.date' class='method'><code>fn <a href='#method.date' class='fnname'>date</a>(&amp;mut self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, month: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, day: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
 <div class='docblock'><p>Sets the date of interest to the date represented by its
 arguments.</p>
@@ -170,7 +162,9 @@ arguments.</p>
 - <code>month</code> range: [1, 12]
 - <code>year</code> is the common 4 digit representation.</p>
 </div><h4 id='method.unix_date' class='method'><code>fn <a href='#method.unix_date' class='fnname'>unix_date</a>(&amp;mut self, ts: <a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
-<div class='docblock'><p>Sets the date to the date defined by a time stamp.</p>
+<div class='docblock'><p>Sets the date to the date defined the Unix timestamp.
+See the top-level documentation for the exact definition 
+of timestamp.</p>
 </div><h4 id='method.fajr_angle' class='method'><code>fn <a href='#method.fajr_angle' class='fnname'>fajr_angle</a>(&amp;mut self, degrees: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>
 <div class='docblock'><p>Sets the Fajr angle in degrees.</p>
 
@@ -199,7 +193,7 @@ arguments.</p>
 <div class='docblock'><p>Calculates the times of interest based on the supplied
 information. The specification object can be reused post
 calculation.</p>
-</div><h4 id='method.year' class='method'><code>fn <a href='#method.year' class='fnname'>year</a>(&amp;self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../shams/struct.YearIter.html' title='shams::YearIter'>YearIter</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+</div><h4 id='method.year' class='method'><code>fn <a href='#method.year' class='fnname'>year</a>(&amp;self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../shams/struct.ShamsYear.html' title='shams::ShamsYear'>ShamsYear</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator that produces a ShamsDay for each day
 of the specified year.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../shams/struct.ShamsSpec.html' title='shams::ShamsSpec'>ShamsSpec</a></code></h4>

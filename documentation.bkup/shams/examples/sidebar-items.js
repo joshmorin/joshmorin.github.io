@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["a","The time between Al-Fajr and true midnight"],["b","Longest day of the year"]]});

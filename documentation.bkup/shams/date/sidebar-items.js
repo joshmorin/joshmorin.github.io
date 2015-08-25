@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Date","A unit structure to hold the year, month, and day expressed as 16-bit unsigned integers."],["Duration","A unit `i64` wrapper that represents duration expressed using Unix time."],["Time","A unit `i64` wrapper that represents Unix time."]]});

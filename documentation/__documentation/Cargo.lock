@@ -3,8 +3,8 @@ name = "documentation"
 version = "0.1.0"
 dependencies = [
  "mimty 0.3.0 (git+https://joshmorin@bitbucket.org/joshmorin/mimty.git)",
- "moid 0.2.0 (git+https://joshmorin@bitbucket.org/joshmorin/moid.git)",
- "shams 0.6.0 (git+https://joshmorin@bitbucket.org/joshmorin/shams.git)",
+ "moid 0.3.0 (git+https://joshmorin@bitbucket.org/joshmorin/moid.git)",
+ "shams 0.7.0 (git+https://joshmorin@bitbucket.org/joshmorin/shams.git)",
 ]
 
 [[package]]
@@ -46,16 +46,16 @@ source = "git+https://joshmorin@bitbucket.org/joshmorin/mimty.git#9211fc7b6220f7
 
 [[package]]
 name = "moid"
-version = "0.2.0"
-source = "git+https://joshmorin@bitbucket.org/joshmorin/moid.git#69542b16be5925af554d9d7cbe596400279a5c2d"
+version = "0.3.0"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/moid.git#748f400c634f3c541e3cd7ae38aa70b7b5ab972e"
 dependencies = [
  "time 0.1.32 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "shams"
-version = "0.6.0"
-source = "git+https://joshmorin@bitbucket.org/joshmorin/shams.git#651bcb5baa063c5096e496dd1171fdb2e9060880"
+version = "0.7.0"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/shams.git#91d08efa5154d3bb24b2580b0b914fe7a2f5b521"
 dependencies = [
  "gcc 0.3.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",

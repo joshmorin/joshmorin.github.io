@@ -774,23 +774,6 @@
 <span id="732">732</span>
 <span id="733">733</span>
 <span id="734">734</span>
-<span id="735">735</span>
-<span id="736">736</span>
-<span id="737">737</span>
-<span id="738">738</span>
-<span id="739">739</span>
-<span id="740">740</span>
-<span id="741">741</span>
-<span id="742">742</span>
-<span id="743">743</span>
-<span id="744">744</span>
-<span id="745">745</span>
-<span id="746">746</span>
-<span id="747">747</span>
-<span id="748">748</span>
-<span id="749">749</span>
-<span id="750">750</span>
-<span id="751">751</span>
 </pre><pre class='rust '>
 <span class='comment'>/*
     Shams: Islamic prayer times and other solar temporal events
@@ -812,8 +795,8 @@
 
 
 <span class='comment'>/*
-    TODO
-        - add correct tempreture value generation to YearIter
+    TODO            
+        - Correct tempreture for ShamsYear
             - issue: 
                     At present, the temprature is taken to be 
                     constant through-out the year. This might 
@@ -844,6 +827,11 @@
 <span class='doccomment'>//! durations - for both myself and the user - by deferring the </span>
 <span class='doccomment'>//! handling of leap seconds and synchronization with UTC to the host</span>
 <span class='doccomment'>//! system.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! The unix timestamp is defined as the number of seconds that </span>
+<span class='doccomment'>//! have elapsed since the epoch (1970-01-01T00:00:00Z - Note </span>
+<span class='doccomment'>//! the timezone), not counting the leap seconds. As a coloray, </span>
+<span class='doccomment'>//! this library does not support dates that predate the epoch. </span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! For most use cases, the distinction between UTC and POSIX</span>
 <span class='doccomment'>//! time is not significant enough to warrant consideration.</span>
@@ -904,9 +892,7 @@
 <span class='doccomment'>///    </span>
 <span class='doccomment'>/// 2. **Time Details**</span>
 <span class='doccomment'>///     1. Prayer time Calculation Methods</span>
-<span class='doccomment'>///     2. Timezone</span>
-<span class='doccomment'>///     3. Date</span>
-<span class='doccomment'>///     4. DST state</span>
+<span class='doccomment'>///     2. Date</span>
 <span class='doccomment'>/// </span>
 <span class='doccomment'>/// 3. **Extended Method Details**</span>
 <span class='doccomment'>/// </span>
@@ -923,8 +909,8 @@
 <span class='doccomment'>/// range from &lt;`1000` millibars up to around `1020`. The standard </span>
 <span class='doccomment'>/// value is `1010.0`.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Elevation, temperature, location coordinates, Time zone, and DST </span>
-<span class='doccomment'>/// can all be determined with a quick web search.</span>
+<span class='doccomment'>/// Elevation, temperature, and location coordinates can all be </span>
+<span class='doccomment'>/// determined with a quick web search.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Which method to use varies from one region to another. If you </span>
 <span class='doccomment'>/// don&#39;t care about the correctness of prayer times, you can set </span>
@@ -952,9 +938,10 @@
         <span class='ident'>s</span>
     }
     
-    <span class='doccomment'>/// Attempts to set method, latitude, longitude, elevation, pressure </span>
-    <span class='doccomment'>/// and timezone. This deviates from the builder pattern because </span>
-    <span class='doccomment'>/// only a small set of cities have these values defined.</span>
+    <span class='doccomment'>/// Attempts to set method, latitude, longitude, elevation, and </span>
+    <span class='doccomment'>/// pressure/. This function&#39;s behaviour deviates from the </span>
+    <span class='doccomment'>/// builder pattern because only a small set of cities have </span>
+    <span class='doccomment'>/// these values defined.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// City names may be supplied in Arabic or English. If multiple </span>
     <span class='doccomment'>/// cities with the same name exist, include the name of the </span>
@@ -985,7 +972,6 @@
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>d</span> <span class='op'>=</span> <span class='ident'>ShamsSpec</span>::<span class='ident'>new</span>();
                 <span class='ident'>d</span>.<span class='ident'>method</span>(<span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>method</span>)
                  .<span class='ident'>coordinates</span>(<span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>lat</span>, <span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>lon</span>)
-                 .<span class='ident'>timezone</span>(<span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>tz</span>)
                  .<span class='ident'>temperature</span>((<span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>temp</span>.<span class='number'>0</span><span class='op'>+</span><span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>temp</span>.<span class='number'>1</span>)<span class='op'>/</span><span class='number'>2.0</span>)
                  .<span class='ident'>pressure</span>(<span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>pres</span>)
                  .<span class='ident'>elevation</span>(<span class='ident'>s</span>.<span class='number'>1</span>.<span class='ident'>elv</span>);
@@ -1025,16 +1011,7 @@
         <span class='self'>self</span>.<span class='ident'>location</span>.<span class='ident'>degree_long</span> <span class='op'>=</span> <span class='ident'>lon</span> <span class='kw'>as</span> <span class='ident'>c_double</span>;
         <span class='self'>self</span>
     }
-    
-    
-    <span class='doccomment'>/// Sets the GMT/UTC offset to `offset`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// All passed to this object or resulting objects should be </span>
-    <span class='doccomment'>/// relative to this offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>timezone</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>offset</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ShamsSpec</span> {
-        <span class='self'>self</span>.<span class='ident'>location</span>.<span class='ident'>gmt_diff</span> <span class='op'>=</span> <span class='ident'>offset</span>;
-        <span class='self'>self</span>
-    }
+
     
     <span class='doccomment'>/// Sets the temperature to `celsius`. Temperature values are in </span>
     <span class='doccomment'>/// Celsius.</span>
@@ -1056,12 +1033,7 @@
         <span class='self'>self</span>
     }
     
-    <span class='doccomment'>/// Sets the state of daylight saving time.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>dst</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>enable</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ShamsSpec</span> {
-        <span class='self'>self</span>.<span class='ident'>location</span>.<span class='ident'>dst</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>enable</span> {<span class='number'>1</span>} <span class='kw'>else</span> {<span class='number'>0</span>};
-        <span class='self'>self</span>
-    }
-    <span class='doccomment'>/// Sets date of interest to today.</span>
+    <span class='doccomment'>/// Sets date of interest as today according to local time.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>today</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ShamsSpec</span> {
         <span class='kw'>use</span> <span class='ident'>time</span>;
         <span class='kw'>let</span> <span class='ident'>tm</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>now</span>();
@@ -1089,10 +1061,12 @@
         <span class='self'>self</span>
     
     }
-    <span class='doccomment'>/// Sets the date to the date defined by a time stamp. </span>
+    <span class='doccomment'>/// Sets the date to the date defined the Unix timestamp. </span>
+    <span class='doccomment'>/// See the top-level documentation for the exact definition </span>
+    <span class='doccomment'>/// of timestamp.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>unix_date</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ts</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ShamsSpec</span> {
         <span class='kw'>use</span> <span class='ident'>time</span>;
-        <span class='kw'>let</span> <span class='ident'>t</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>at_utc</span>(<span class='ident'>time</span>::<span class='ident'>Timespec</span>::<span class='ident'>new</span>(<span class='ident'>ts</span>, <span class='number'>0</span>));
+        <span class='kw'>let</span> <span class='ident'>t</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>at</span>(<span class='ident'>time</span>::<span class='ident'>Timespec</span>::<span class='ident'>new</span>(<span class='ident'>ts</span>, <span class='number'>0</span>));
         <span class='self'>self</span>.<span class='ident'>date</span>.<span class='ident'>year</span> <span class='op'>=</span> <span class='ident'>t</span>.<span class='ident'>tm_year</span> <span class='op'>+</span> <span class='number'>1900</span> <span class='kw'>as</span> <span class='ident'>c_int</span>;
         <span class='self'>self</span>.<span class='ident'>date</span>.<span class='ident'>month</span> <span class='op'>=</span> <span class='ident'>t</span>.<span class='ident'>tm_mon</span> <span class='op'>+</span> <span class='number'>1</span> <span class='kw'>as</span> <span class='ident'>c_int</span>;
         <span class='self'>self</span>.<span class='ident'>date</span>.<span class='ident'>day</span> <span class='op'>=</span> <span class='ident'>t</span>.<span class='ident'>tm_mday</span> <span class='kw'>as</span> <span class='ident'>c_int</span>;
@@ -1164,7 +1138,6 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span>: [<span class='ident'>itl</span>::<span class='ident'>Prayer</span>; <span class='number'>6</span>] <span class='op'>=</span> [<span class='ident'>Default</span>::<span class='ident'>default</span>(); <span class='number'>6</span>];
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>config</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>clone</span>();
         
-        
         <span class='comment'>// Validation</span>
         <span class='kw'>if</span> <span class='ident'>config</span>.<span class='ident'>date</span>.<span class='ident'>year</span> <span class='op'>&lt;</span> <span class='number'>1970</span> {
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='macro'>concat</span><span class='macro'>!</span>(<span class='string'>&quot;Minimum year supported is 1970: &quot;</span>,
@@ -1202,14 +1175,7 @@
                     <span class='string'>&quot;method is in the range of [0, 11]. supplied &quot;</span>,
                     <span class='string'>&quot;month is {}.&quot;</span>), <span class='ident'>config</span>.<span class='ident'>method</span>.<span class='ident'>method</span>));
         }
-
-        <span class='kw'>if</span> <span class='op'>!</span>(<span class='ident'>config</span>.<span class='ident'>location</span>.<span class='ident'>gmt_diff</span> <span class='op'>&gt;=</span> <span class='op'>-</span><span class='number'>12.000001</span> <span class='op'>&amp;&amp;</span> <span class='ident'>config</span>.<span class='ident'>location</span>.<span class='ident'>gmt_diff</span> <span class='op'>&lt;=</span> <span class='number'>14.000001</span>) {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='macro'>concat</span><span class='macro'>!</span>(<span class='string'>&quot;Invalid time zone specified: valid &quot;</span>,
-                    <span class='string'>&quot;method is in the range of UTC-12, UTC+14]. supplied &quot;</span>,
-                    <span class='string'>&quot;month is {}.&quot;</span>), <span class='ident'>config</span>.<span class='ident'>location</span>.<span class='ident'>gmt_diff</span>));
-        }
         
-
         <span class='comment'>// convert Prayer time -&gt; Option&lt;timestamp&gt;, extreme</span>
         <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>fill</span> {
             (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>i</span>: <span class='ident'>expr</span>) <span class='op'>=&gt;</span> (
@@ -1237,7 +1203,7 @@
             <span class='kw'>let</span> <span class='ident'>month</span> <span class='op'>=</span> <span class='ident'>config</span>.<span class='ident'>date</span>.<span class='ident'>month</span> <span class='kw'>as</span> <span class='ident'>u16</span>;
             <span class='kw'>let</span> <span class='ident'>day</span> <span class='op'>=</span> <span class='ident'>config</span>.<span class='ident'>date</span>.<span class='ident'>day</span> <span class='kw'>as</span> <span class='ident'>u16</span>;
             
-            <span class='ident'>config</span>.<span class='ident'>unix_date</span>(<span class='ident'>uts</span>(<span class='ident'>year</span>, <span class='ident'>month</span>, <span class='ident'>day</span>, <span class='number'>1</span>, <span class='number'>0</span>, <span class='number'>0</span>)<span class='op'>+</span><span class='number'>24</span><span class='op'>*</span><span class='number'>3600</span>);
+            <span class='ident'>config</span>.<span class='ident'>unix_date</span>(<span class='ident'>uts</span>(<span class='ident'>year</span>, <span class='ident'>month</span>, <span class='ident'>day</span>, <span class='number'>12</span>, <span class='number'>0</span>, <span class='number'>0</span>)<span class='op'>+</span><span class='number'>24</span><span class='op'>*</span><span class='number'>3600</span>);
             
             <span class='kw'>unsafe</span> {<span class='ident'>itl</span>::<span class='ident'>getPrayerTimes</span>(<span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>location</span>, <span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>method</span>, <span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>date</span>, <span class='ident'>buf</span>.<span class='ident'>as_mut_ptr</span>())};
             
@@ -1255,8 +1221,8 @@
     
     <span class='doccomment'>/// Returns an iterator that produces a ShamsDay for each day </span>
     <span class='doccomment'>/// of the specified year.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>year</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>year</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>YearIter</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
-        <span class='ident'>YearIter</span>::<span class='ident'>new</span>(<span class='self'>self</span>, <span class='ident'>year</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>year</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>year</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ShamsYear</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
+        <span class='ident'>ShamsYear</span>::<span class='ident'>new</span>(<span class='self'>self</span>, <span class='ident'>year</span>)
     }
 }
 
@@ -1473,10 +1439,10 @@
         }
     }
     <span class='comment'>// copy to Spec for a general on the spot generation?</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>time_phase</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>time</span>: <span class='ident'>Time</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>time_phase</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>time</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='kw'>let</span> (<span class='prelude-val'>Some</span>(<span class='ident'>Duration</span>(<span class='ident'>daytime</span>)), <span class='prelude-val'>Some</span>(<span class='ident'>Duration</span>(<span class='ident'>nighttime</span>)), <span class='prelude-val'>Some</span>(<span class='ident'>Time</span>(<span class='ident'>sunrise</span>))) <span class='op'>=</span> 
                                                   (<span class='self'>self</span>.<span class='ident'>daytime</span>(), <span class='self'>self</span>.<span class='ident'>nighttime</span>(), <span class='self'>self</span>.<span class='ident'>sunrise</span>()) {
-            <span class='kw'>let</span> <span class='ident'>time</span> <span class='op'>=</span> (<span class='ident'>time</span> <span class='op'>-</span> <span class='ident'>sunrise</span>).<span class='number'>0</span>;
+            <span class='kw'>let</span> <span class='ident'>time</span> <span class='op'>=</span> <span class='ident'>time</span> <span class='op'>-</span> <span class='ident'>sunrise</span>;
             
             <span class='comment'>// if within current self&#39;s day/night</span>
             <span class='kw'>if</span> <span class='ident'>time</span> <span class='op'>&lt;=</span> <span class='ident'>daytime</span> <span class='op'>+</span> <span class='ident'>nighttime</span> <span class='op'>&amp;&amp;</span> <span class='ident'>time</span> <span class='op'>&gt;=</span> <span class='number'>0</span> {
@@ -1498,44 +1464,44 @@
 }
 
 
-<span class='doccomment'>/// Iterates over every day of a given year, yielding a</span>
+<span class='doccomment'>/// An Iterator over every day of a given year, yielding a</span>
 <span class='doccomment'>/// ShamsDay object for each day. </span>
 <span class='doccomment'>/// </span>
 <span class='doccomment'>/// See ShamsSpec for generating an instance.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>YearIter</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ShamsYear</span> {
     <span class='ident'>spec</span>        : <span class='ident'>ShamsSpec</span>,
     <span class='ident'>day</span>         : <span class='ident'>u16</span>,
     <span class='ident'>month</span>       : <span class='ident'>u16</span>,
     <span class='ident'>year</span>        : <span class='ident'>u16</span>,
     <span class='ident'>dim</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='ident'>u16</span>]
 }
-<span class='kw'>impl</span> <span class='ident'>YearIter</span> {
-    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>spec</span>: <span class='kw-2'>&amp;</span><span class='ident'>ShamsSpec</span>, <span class='ident'>year</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>YearIter</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>ShamsYear</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>spec</span>: <span class='kw-2'>&amp;</span><span class='ident'>ShamsSpec</span>, <span class='ident'>year</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ShamsYear</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
         <span class='kw'>use</span> ::<span class='ident'>date</span>::<span class='ident'>month_list</span>;
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='ident'>spec</span>.<span class='ident'>clone</span>().<span class='ident'>date</span>(<span class='ident'>year</span>, <span class='number'>1</span>, <span class='number'>1</span>).<span class='ident'>calculate</span>() {
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>);
         }
         <span class='kw'>else</span> {
-            <span class='prelude-val'>Ok</span>(<span class='ident'>YearIter</span>{    <span class='ident'>dim</span>:<span class='ident'>month_list</span>(<span class='ident'>year</span>),
+            <span class='prelude-val'>Ok</span>(<span class='ident'>ShamsYear</span>{   <span class='ident'>dim</span>:<span class='ident'>month_list</span>(<span class='ident'>year</span>),
                             <span class='ident'>spec</span>:<span class='op'>*</span><span class='ident'>spec</span>,
                             <span class='ident'>year</span>:<span class='ident'>year</span>,
-                            <span class='ident'>month</span>:<span class='number'>0</span>,
-                            <span class='ident'>day</span>:<span class='number'>0</span>               })
+                            <span class='ident'>month</span>:<span class='number'>1</span>,
+                            <span class='ident'>day</span>:<span class='number'>1</span>               })
         }
     }
 }
-<span class='kw'>impl</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>YearIter</span> {
+<span class='kw'>impl</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>ShamsYear</span> {
     <span class='kw'>type</span> <span class='ident'>Item</span><span class='op'>=</span><span class='ident'>ShamsDay</span>;
     <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>ShamsDay</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>day</span> <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>dim</span>[<span class='self'>self</span>.<span class='ident'>month</span> <span class='kw'>as</span> <span class='ident'>usize</span>] {
-            <span class='self'>self</span>.<span class='ident'>day</span> <span class='op'>=</span> <span class='number'>0</span>;
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>day</span> <span class='op'>&gt;</span> <span class='self'>self</span>.<span class='ident'>dim</span>[<span class='self'>self</span>.<span class='ident'>month</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>-</span> <span class='number'>1</span>] {
+            <span class='self'>self</span>.<span class='ident'>day</span> <span class='op'>=</span> <span class='number'>1</span>;
             <span class='self'>self</span>.<span class='ident'>month</span> <span class='op'>+=</span> <span class='number'>1</span>;
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>month</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>dim</span>.<span class='ident'>len</span>() {
+            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>month</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>-</span> <span class='number'>1</span> <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>dim</span>.<span class='ident'>len</span>() {
                 <span class='kw'>return</span> <span class='prelude-val'>None</span>;
             }
         }
+        <span class='self'>self</span>.<span class='ident'>spec</span>.<span class='ident'>date</span>(<span class='self'>self</span>.<span class='ident'>year</span>, <span class='self'>self</span>.<span class='ident'>month</span>, <span class='self'>self</span>.<span class='ident'>day</span>);
         <span class='self'>self</span>.<span class='ident'>day</span> <span class='op'>+=</span> <span class='number'>1</span>;
-        <span class='self'>self</span>.<span class='ident'>spec</span>.<span class='ident'>date</span>(<span class='self'>self</span>.<span class='ident'>year</span>, <span class='self'>self</span>.<span class='ident'>month</span><span class='op'>+</span><span class='number'>1</span>, <span class='self'>self</span>.<span class='ident'>day</span>);
         <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>spec</span>.<span class='ident'>calculate</span>().<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> 
             <span class='macro'>panic</span><span class='macro'>!</span>(<span class='macro'>concat</span><span class='macro'>!</span>(<span class='string'>&quot;This is an unreported bug in the &quot;</span>,
                            <span class='string'>&quot;library, please report it with a &quot;</span>,
