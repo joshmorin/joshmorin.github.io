@@ -4,7 +4,9 @@ version = "0.1.0"
 dependencies = [
  "mimty 0.3.0 (git+https://joshmorin@bitbucket.org/joshmorin/mimty.git)",
  "moid 0.3.0 (git+https://joshmorin@bitbucket.org/joshmorin/moid.git)",
+ "network-integer 0.1.0 (git+https://joshmorin@bitbucket.org/joshmorin/network-integer.git)",
  "shams 0.7.0 (git+https://joshmorin@bitbucket.org/joshmorin/shams.git)",
+ "zoj 0.1.0 (git+https://joshmorin@bitbucket.org/joshmorin/zoj.git)",
 ]
 
 [[package]]
@@ -53,6 +55,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "network-integer"
+version = "0.1.0"
+source = "git+https://bitbucket.org/joshmorin/network-integer.git#f477d99ab40afbb8f6255eb4f4212e0293ffe85b"
+
+[[package]]
+name = "network-integer"
+version = "0.1.0"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/network-integer.git#f477d99ab40afbb8f6255eb4f4212e0293ffe85b"
+
+[[package]]
 name = "shams"
 version = "0.7.0"
 source = "git+https://joshmorin@bitbucket.org/joshmorin/shams.git#dbcafeb44f82a3ab1c49df1a9b9f3745914f9abb"
@@ -81,4 +93,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "winapi-build"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "zoj"
+version = "0.1.0"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/zoj.git#6d7654a59c873ce24e3b99012e1a2814c011be14"
+dependencies = [
+ "network-integer 0.1.0 (git+https://bitbucket.org/joshmorin/network-integer.git)",
+]
 

@@ -15,3 +15,11 @@ git = "https://joshmorin@bitbucket.org/joshmorin/shams.git"
 name = "mimty"
 git = "https://joshmorin@bitbucket.org/joshmorin/mimty.git"
 
+[dependencies.network-integer]
+name = "network-integer"
+git = "https://joshmorin@bitbucket.org/joshmorin/network-integer.git"
+
+[dependencies.zoj]
+name = "zoj"
+git = "https://joshmorin@bitbucket.org/joshmorin/zoj.git"
+

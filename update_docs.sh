@@ -8,5 +8,7 @@ cargo clean
 cargo doc
 cd -
 cp -r documentation/__documentation/target/doc/* documentation
-
+cd -
+cargo clean
+cd -
 
