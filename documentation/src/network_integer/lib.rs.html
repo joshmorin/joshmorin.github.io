@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/josh/.cargo/git/checkouts/network-integer-fdbe54172763b5de/master/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/josh/.cargo/git/checkouts/network-integer-f5cbb881e8ffb497/master/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -222,7 +222,7 @@
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
     <span class='comment'>// Precise value needed to offset overflow in Rust&#39;s infrastructure.</span>
-    <span class='kw'>let</span> <span class='ident'>b</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0xB16B00B5</span>; 
+    <span class='kw'>let</span> <span class='ident'>b</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x1</span>;
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>b</span> <span class='op'>==</span> <span class='ident'>bytes_to_integer</span>(<span class='kw-2'>&amp;</span><span class='ident'>integer_to_bytes</span>(<span class='ident'>b</span>)[..]).<span class='ident'>unwrap</span>());
 }
 </pre>

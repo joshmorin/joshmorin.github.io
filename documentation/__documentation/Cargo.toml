@@ -23,3 +23,7 @@ git = "https://joshmorin@bitbucket.org/joshmorin/network-integer.git"
 name = "zoj"
 git = "https://joshmorin@bitbucket.org/joshmorin/zoj.git"
 
+[dependencies.hw]
+name = "hw"
+git = "https://joshmorin@bitbucket.org/joshmorin/hw.git"
+

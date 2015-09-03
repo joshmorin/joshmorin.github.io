@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `hw` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, hw">
+
+    <title>hw - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'hw', ty: 'mod', relpath: '../'};</script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>hw</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/hw/lib.rs.html#20-269' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><pre class='rust rust-example-rendered'>
+
+<span class='kw'>use</span> <span class='ident'>hw</span>;
+
+
+<span class='comment'>// Sets display brightness to 60%</span>
+<span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>hw</span>::<span class='ident'>Display</span>::<span class='ident'>brightness</span>(<span class='number'>0.6</span>);
+
+<span class='comment'>// Mutes the systems speaker or connected headphone.</span>
+<span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>hw</span>::<span class='ident'>Speaker</span>::<span class='ident'>unmute</span>();
+
+<span class='comment'>// Shutdown via a shutdown signal to the host operating system</span>
+<span class='comment'>//let _ = hw::System::shutdown();</span>
+ 
+</pre>
+
+<h2 id="environment-variables" class='section-header'><a
+                           href="#environment-variables">ENVIRONMENT VARIABLES</a></h2>
+<ol>
+<li><code>HWLIB_ERROR_LOG</code>: If set, prints verbose logging of internal events to
+                  stderr.</li>
+<li>Additional environment variables may be significant on some platforms. 
+refer to the <code>privilege</code> and <code>unprivileged</code> modules for further details.</li>
+</ol>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='privileged/index.html'
+                               title='hw::privileged'>privileged</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='unprivileged/index.html'
+                               title='hw::unprivileged'>unprivileged</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Display.html'
+                               title='hw::Display'>Display</a></td>
+                        <td class='docblock short'>
+                             <p>System Video Output Handle</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Error.html'
+                               title='hw::Error'>Error</a></td>
+                        <td class='docblock short'>
+                             <p>Error description type for Hw</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Speaker.html'
+                               title='hw::Speaker'>Speaker</a></td>
+                        <td class='docblock short'>
+                             <p>System Audio Output Handle</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.System.html'
+                               title='hw::System'>System</a></td>
+                        <td class='docblock short'>
+                             <p>System Handle</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.ErrorKind.html'
+                               title='hw::ErrorKind'>ErrorKind</a></td>
+                        <td class='docblock short'>
+                             <p>Error Kind</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.Result.html'
+                               title='hw::Result'>Result</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "hw";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

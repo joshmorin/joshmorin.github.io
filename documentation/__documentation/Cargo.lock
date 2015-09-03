@@ -2,6 +2,7 @@
 name = "documentation"
 version = "0.1.0"
 dependencies = [
+ "hw 0.1.0 (git+https://joshmorin@bitbucket.org/joshmorin/hw.git)",
  "mimty 0.3.0 (git+https://joshmorin@bitbucket.org/joshmorin/mimty.git)",
  "moid 0.3.0 (git+https://joshmorin@bitbucket.org/joshmorin/moid.git)",
  "network-integer 0.1.0 (git+https://joshmorin@bitbucket.org/joshmorin/network-integer.git)",
@@ -25,6 +26,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "advapi32-sys 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "winapi 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "hw"
+version = "0.1.0"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/hw.git#a3ccd8755b4cd022e3157f4ea341f92b675d8c19"
+dependencies = [
+ "libc 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -57,12 +66,12 @@ dependencies = [
 [[package]]
 name = "network-integer"
 version = "0.1.0"
-source = "git+https://bitbucket.org/joshmorin/network-integer.git#f477d99ab40afbb8f6255eb4f4212e0293ffe85b"
+source = "git+https://bitbucket.org/joshmorin/network-integer.git#99bd626396eefc928a8f0e9b9284a466e447e34f"
 
 [[package]]
 name = "network-integer"
 version = "0.1.0"
-source = "git+https://joshmorin@bitbucket.org/joshmorin/network-integer.git#f477d99ab40afbb8f6255eb4f4212e0293ffe85b"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/network-integer.git#99bd626396eefc928a8f0e9b9284a466e447e34f"
 
 [[package]]
 name = "shams"
