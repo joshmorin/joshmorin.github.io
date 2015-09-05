@@ -309,6 +309,124 @@
 <span id="267">267</span>
 <span id="268">268</span>
 <span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
 </pre><pre class='rust '>
 <span class='comment'>/*
     Hw: A cross-platform hardware controls API
@@ -336,32 +454,44 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! // Sets display brightness to 60%</span>
-<span class='doccomment'>//! let _ = hw::Display::brightness(0.6);</span>
+<span class='doccomment'>//! let _ = hw::display_brightness(0.6);</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! // Mutes the systems speaker or connected headphone.</span>
-<span class='doccomment'>//! let _ = hw::Speaker::unmute();</span>
+<span class='doccomment'>//! let _ = hw::speaker_unmute();</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! // Shutdown via a shutdown signal to the host operating system</span>
-<span class='doccomment'>//! //let _ = hw::System::shutdown();</span>
+<span class='doccomment'>//! //let _ = hw::power_shutdown();</span>
 <span class='doccomment'>//! </span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//! </span>
+<span class='doccomment'>//! Crate level functions (`display_brightness`, `speaker_unmute`, and </span>
+<span class='doccomment'>//! `power_shutdown`) are simple wrappers around their `Hw` equivalents.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//!</span>
 <span class='doccomment'>//! ## ENVIRONMENT VARIABLES ##</span>
 <span class='doccomment'>//! </span>
 <span class='doccomment'>//! 1. `HWLIB_ERROR_LOG`: If set, prints verbose logging of internal events to</span>
 <span class='doccomment'>//!                       stderr.</span>
 <span class='doccomment'>//! 2. Additional environment variables may be significant on some platforms. </span>
 <span class='doccomment'>//!    refer to the `privilege` and `unprivileged` modules for further details.</span>
-<span class='doccomment'>//!</span>
+<span class='doccomment'>//! </span>
 <span class='comment'>// things to do:</span>
 <span class='comment'>//      keyboard/mouse input (Implement into iterator)</span>
 <span class='comment'>//      screen suspend</span>
 <span class='comment'>//      audio suspend</span>
-<span class='comment'>//      screen susystem</span>
+<span class='comment'>//      screen subsystem</span>
 <span class='comment'>//      system suspend</span>
 <span class='comment'>//      drop root for cmd? : implement as a shell script </span>
 <span class='comment'>//                           (simpler than using fork and IPC)</span>
 <span class='comment'>//      </span>
+<span class='comment'>// Implementors&#39; guidelines</span>
+<span class='comment'>// =======================</span>
+<span class='comment'>// </span>
+<span class='comment'>// 1. Performance is desired but is not a primary concern for this library.</span>
+<span class='comment'>// 2. Avoid storing state. State is kept by the physical hardware or </span>
+<span class='comment'>//    operating system and should be queried if needed.</span>
+<span class='comment'>// 3. Assume multiple instances used simultaneously from multiple threads </span>
+<span class='comment'>//    when using ffi or interacting directly with hardware.</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
@@ -384,7 +514,10 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>error</span>::<span class='op'>*</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;linux&quot;</span>)]</span> <span class='kw'>mod</span> <span class='ident'>linux</span>;
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;linux&quot;</span>)]</span> <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>linux</span>::{<span class='ident'>privileged</span>, <span class='ident'>unprivileged</span>};
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;linux&quot;</span>)]</span> <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>linux</span>::<span class='ident'>PlatformHw</span>;
+
+<span class='comment'>//#[cfg(target_os=&quot;???&quot;)] mod ???;</span>
+<span class='comment'>//#[cfg(target_os=&quot;???&quot;)] pub use ???::PlatformHw;</span>
 
 
 
@@ -392,152 +525,254 @@
 
 
 
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>try_privileged_then_unprivileged</span> {
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> ({
-        <span class='kw'>match</span> <span class='ident'>privileged</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>() {
-            <span class='prelude-val'>Ok</span>(<span class='ident'>o</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>o</span>),
-            _ <span class='op'>=&gt;</span> {
-                <span class='ident'>unprivileged</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>()
-            }
-        }
-    });
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg1</span>: <span class='ident'>expr</span>) <span class='op'>=&gt;</span> ({
-        <span class='kw'>match</span> <span class='ident'>privileged</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg1</span>) {
-            <span class='prelude-val'>Ok</span>(<span class='ident'>o</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>o</span>),
-            _ <span class='op'>=&gt;</span> <span class='ident'>unprivileged</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg1</span>)
-        }
-    });
-    
-}
+<span class='comment'>// Deref was avoided to use Hw as an API PlatformHw must adhere to; PlatformHw</span>
+<span class='comment'>// must to implement what Hw needs for the library to compile. What Hw needs is</span>
+<span class='comment'>// the libraries API.</span>
+<span class='comment'>//</span>
+<span class='comment'>// This also allows PlatformHw to offer platform-specific APIs without </span>
+<span class='comment'>// affecting Hw&#39;s cross-platform API.</span>
+<span class='comment'>//</span>
+<span class='comment'>// It&#39;s also a good place for API documentation.</span>
 
-<span class='doccomment'>/// System Handle</span>
+<span class='doccomment'>/// Hardware Handle</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>System</span>;
-<span class='kw'>impl</span> <span class='ident'>System</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Hw</span>(<span class='ident'>PlatformHw</span>);
+<span class='kw'>impl</span> <span class='ident'>Hw</span> {
+    <span class='doccomment'>/// Return a new hardware handle.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>Hw</span> {
+        <span class='ident'>Hw</span>(<span class='ident'>PlatformHw</span>::<span class='ident'>new</span>())
+    }
+
     <span class='doccomment'>/// Immediate system power off.</span>
     <span class='doccomment'>/// </span>
     <span class='doccomment'>/// **Warning:** May cause data loss and other undesirable side-effects associated with</span>
     <span class='doccomment'>/// an &quot;Unclean&quot; shutdown. Consider `System::shutdown` if this is </span>
     <span class='doccomment'>/// undesirable.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_off</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>System</span>, <span class='ident'>power_off</span>)}
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_off</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>power_off</span>()}
     <span class='doccomment'>/// Immediate system reboot.</span>
     <span class='doccomment'>/// </span>
     <span class='doccomment'>/// **Warning:** May cause data loss and other undesirable side-effects associated with</span>
     <span class='doccomment'>/// an &quot;Unclean&quot; shutdown. Consider `System::restart` if this is </span>
     <span class='doccomment'>/// undesirable.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>reboot</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>System</span>, <span class='ident'>reboot</span>)}
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_reboot</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>power_reboot</span>()}
     <span class='doccomment'>/// Sends the shutdown signal for an operating system-assisted power off.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Exact behavior is system-dependent, and may entail additional user action </span>
     <span class='doccomment'>/// (confirmation). Successful result may not imply successful shutdown </span>
     <span class='doccomment'>/// initiation.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>shutdown</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>System</span>, <span class='ident'>shutdown</span>)}
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_shutdown</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>power_shutdown</span>()}
     <span class='doccomment'>/// Sends the restart signal for an operating system-assisted reboot.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Exact behavior is system-dependent, and may entail additional user action </span>
     <span class='doccomment'>/// (confirmation). Successful result may not imply successful shutdown </span>
     <span class='doccomment'>/// initiation.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>restart</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>System</span>, <span class='ident'>restart</span>)}
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_restart</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>power_restart</span>()}
     <span class='comment'>/*
-    /// Sends the sleep signal for an operating system-assisted reboot.
-    /// XXX should use suspend or leave for immediate suspend? Does immediate
-    /// suspend even make sense?
-    /// 
-    /// Exact behavior is system-dependent, and may entail additional user action 
-    /// (confirmation). Successful result may not imply successful shutdown 
-    /// initiation.
-    pub fn sleep() -&gt; Result&lt;()&gt; {try_privileged_then_unprivileged!(System, suspend)}
+        /// Sends the sleep signal for an operating system-assisted reboot.
+        /// XXX should use suspend or leave for immediate suspend? Does immediate
+        /// suspend even make sense?
+        /// 
+        /// Exact behavior is system-dependent, and may entail additional user action 
+        /// (confirmation). Successful result may not imply successful shutdown 
+        /// initiation.
+        pub fn sleep() -&gt; Result&lt;()&gt; {try_privileged_then_unprivileged!(System, suspend)}
     */</span>
-    
-}
-<span class='doccomment'>/// System Audio Output Handle</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Speaker</span>;
-<span class='kw'>impl</span> <span class='ident'>Speaker</span> {
+
     <span class='doccomment'>/// Sets system audio output volume to a specified level. `level` range </span>
     <span class='doccomment'>/// must be a value either 0.0 (min), 1.0 (max), or any value in between. </span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>volume</span>(<span class='ident'>level</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>Speaker</span>, <span class='ident'>volume</span>, <span class='ident'>level</span>)}
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>speaker_volume</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>level</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>speaker_volume</span>(<span class='ident'>level</span>)}
     <span class='doccomment'>/// Mutes system audio output</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>mute</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>Speaker</span>, <span class='ident'>mute</span>)}
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>speaker_mute</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>speaker_mute</span>()}
     <span class='doccomment'>/// Unmutes system audio output</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>unmute</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>Speaker</span>, <span class='ident'>unmute</span>)}
-}
-
-<span class='doccomment'>/// System Video Output Handle</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Display</span>;
-<span class='kw'>impl</span> <span class='ident'>Display</span> {
-    <span class='doccomment'>/// Sets system video output brightness to a specified intensity. </span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>speaker_unmute</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>speaker_unmute</span>()}
+    
+    <span class='doccomment'>/// Sets all system video output brightness to a specified intensity. </span>
     <span class='doccomment'>/// `intensity` range must be a value either 0.0 (min), 1.0 (max), </span>
     <span class='doccomment'>/// or any value in between. </span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>brightness</span>(<span class='ident'>intensity</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>Display</span>, <span class='ident'>brightness</span>, <span class='ident'>intensity</span>)}
-    <span class='doccomment'>/// Turns off video output for the system.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>off</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>Display</span>, <span class='ident'>off</span>)}
-    <span class='doccomment'>/// Turns on video output for the system.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>on</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='macro'>try_privileged_then_unprivileged</span><span class='macro'>!</span>(<span class='ident'>Display</span>, <span class='ident'>on</span>)}
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>display_brightness</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>intensity</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>display_brightness</span>(<span class='ident'>intensity</span>)}
+    <span class='doccomment'>/// Turns off all video output for the system.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>display_off</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>display_off</span>()}
+    <span class='doccomment'>/// Turns on all video output for the system.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>display_on</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>display_on</span>()}
+}
+
+<span class='comment'>// an ergonomic api to elide instating an object with an arity of zero. We </span>
+<span class='comment'>// rust users must use fancy words to satisfy our complex. </span>
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>ergonomic_api</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
+        <span class='doccomment'>/// See `Hw`</span>
+        <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='ident'>Hw</span>::<span class='ident'>new</span>().<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>()}
+    };
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg_name</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg_type</span>: <span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
+        <span class='doccomment'>/// See `Hw`</span>
+        <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg_name</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg_type</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='ident'>Hw</span>::<span class='ident'>new</span>().<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg_name</span>)}
+    };
 }
 
 
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>power_off</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>power_reboot</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>power_shutdown</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>power_restart</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>speaker_volume</span>, <span class='ident'>level</span>, <span class='ident'>f64</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>speaker_mute</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>speaker_unmute</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>display_brightness</span>, <span class='ident'>intensity</span>, <span class='ident'>f64</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>display_on</span>);
+<span class='macro'>ergonomic_api</span><span class='macro'>!</span>(<span class='ident'>display_off</span>);
 
 
 <span class='comment'>/*
-pub enum Event {
-    Key
-}
-
-//
-pub trait Events {
-    fn event(&amp;mut self) -&gt; 
-}
-
-#[cfg(test)]
-pub fn events() {
-    use libc::types::os::common::posix01::timeval;
-    use libc::types::os::arch::c95::{c_ushort, c_int};
-    use std::fs::File;
-    use std::io::Read;
-    use std::slice;
-    use std::mem;
+#[cfg(test)] mod events {
     
-    #[repr(C)]
-    struct InputEvent {
-	    time    : timeval,
-	    ty      : c_ushort,
-	    code    : c_ushort,
-	    value   : c_int
+    struct KeyEvent {
+        time:       Option&lt;i64&gt;,
+        code:       u32,
+        pressed:    bool,
+    }
+
+    enum InputEvent {
+        Keyboard(K)
     }
     
-    let mut f = File::open(&quot;/dev/input/mouse0&quot;)
-                .unwrap_or_else(|e| panic!(&quot;couldn&#39;t open it: {}&quot;, e));
     
-    let mut input_event: InputEvent = unsafe {mem::uninitialized()};
+    const EV_KEY              :u32 = 0x01;
     
-    println!(&quot;listening...&quot;);
-    while f.read(
-        unsafe{
-            slice::from_raw_parts_mut(
-                &amp;mut input_event as *mut InputEvent as *mut u8, 
-                mem::size_of::&lt;InputEvent&gt;()
-            )
+    const KEY_RESERVED        :u32 = 0;
+    const KEY_ESC             :u32 = 1;
+    const KEY_1               :u32 = 2;
+    const KEY_2               :u32 = 3;
+    const KEY_3               :u32 = 4;
+    const KEY_4               :u32 = 5;
+    const KEY_5               :u32 = 6;
+    const KEY_6               :u32 = 7;
+    const KEY_7               :u32 = 8;
+    const KEY_8               :u32 = 9;
+    const KEY_9               :u32 = 10;
+    const KEY_0               :u32 = 11;
+    const KEY_MINUS           :u32 = 12;
+    const KEY_EQUAL           :u32 = 13;
+    const KEY_BACKSPACE       :u32 = 14;
+    const KEY_TAB             :u32 = 15;
+    const KEY_Q               :u32 = 16;
+    const KEY_W               :u32 = 17;
+    const KEY_E               :u32 = 18;
+    const KEY_R               :u32 = 19;
+    const KEY_T               :u32 = 20;
+    const KEY_Y               :u32 = 21;
+    const KEY_U               :u32 = 22;
+    const KEY_I               :u32 = 23;
+    const KEY_O               :u32 = 24;
+    const KEY_P               :u32 = 25;
+    const KEY_LEFTBRACE       :u32 = 26;
+    const KEY_RIGHTBRACE      :u32 = 27;
+    const KEY_ENTER           :u32 = 28;
+    const KEY_LEFTCTRL        :u32 = 29;
+    const KEY_A               :u32 = 30;
+    const KEY_S               :u32 = 31;
+    const KEY_D               :u32 = 32;
+    const KEY_F               :u32 = 33;
+    const KEY_G               :u32 = 34;
+    const KEY_H               :u32 = 35;
+    const KEY_J               :u32 = 36;
+    const KEY_K               :u32 = 37;
+    const KEY_L               :u32 = 38;
+    const KEY_SEMICOLON       :u32 = 39;
+    const KEY_APOSTROPHE      :u32 = 40;
+    const KEY_GRAVE           :u32 = 41;
+    const KEY_LEFTSHIFT       :u32 = 42;
+    const KEY_BACKSLASH       :u32 = 43;
+    const KEY_Z               :u32 = 44;
+    const KEY_X               :u32 = 45;
+    const KEY_C               :u32 = 46;
+    const KEY_V               :u32 = 47;
+    const KEY_B               :u32 = 48;
+    const KEY_N               :u32 = 49;
+    const KEY_M               :u32 = 50;
+    const KEY_COMMA           :u32 = 51;
+    const KEY_DOT             :u32 = 52;
+    const KEY_SLASH           :u32 = 53;
+    const KEY_RIGHTSHIFT      :u32 = 54;
+    const KEY_KPASTERISK      :u32 = 55;
+    const KEY_LEFTALT         :u32 = 56;
+    const KEY_SPACE           :u32 = 57;
+    const KEY_CAPSLOCK        :u32 = 58;
+    const KEY_F1              :u32 = 59;
+    const KEY_F2              :u32 = 60;
+    const KEY_F3              :u32 = 61;
+    const KEY_F4              :u32 = 62;
+    const KEY_F5              :u32 = 63;
+    const KEY_F6              :u32 = 64;
+    const KEY_F7              :u32 = 65;
+    const KEY_F8              :u32 = 66;
+    const KEY_F9              :u32 = 67;
+    const KEY_F10             :u32 = 68;
+    const KEY_NUMLOCK         :u32 = 69;
+    const KEY_SCROLLLOCK      :u32 = 70;
+    const KEY_KP7             :u32 = 71;
+    const KEY_KP8             :u32 = 72;
+    const KEY_KP9             :u32 = 73;
+    const KEY_KPMINUS         :u32 = 74;
+    const KEY_KP4             :u32 = 75;
+    const KEY_KP5             :u32 = 76;
+    const KEY_KP6             :u32 = 77;
+    const KEY_KPPLUS          :u32 = 78;
+    const KEY_KP1             :u32 = 79;
+    const KEY_KP2             :u32 = 80;
+    const KEY_KP3             :u32 = 81;
+    const KEY_KP0             :u32 = 82;
+    const KEY_KPDOT           :u32 = 83;
+
+    pub fn events() {
+        use libc::types::os::common::posix01::timeval;
+        use libc::types::os::arch::c95::{c_ushort, c_int};
+        use std::fs::File;
+        use std::io::Read;
+        use std::slice;
+        use std::mem;
+        
+        #[repr(C)]
+        struct InputEvent {
+	        time    : timeval,
+	        ty      : c_ushort,
+	        code    : c_ushort,
+	        value   : c_int
         }
-    ).is_ok() {
-    
-        println!(&quot;{:x} {:x} {:x}&quot;, input_event.ty, input_event.code, input_event.value);
+        
+        let mut f = File::open(&quot;/dev/input/event3&quot;)
+                    .unwrap_or_else(|e| panic!(&quot;couldn&#39;t open it: {}&quot;, e));
+        
+        let mut input_event: InputEvent = unsafe {mem::uninitialized()};
+        
+        println!(&quot;listening...&quot;);
+        while f.read(
+            unsafe{
+                slice::from_raw_parts_mut(
+                    &amp;mut input_event as *mut InputEvent as *mut u8, 
+                    mem::size_of::&lt;InputEvent&gt;()
+                )
+            }
+        ).is_ok() {
+        
+            println!(&quot;{:x} {:x} {:x}&quot;, input_event.ty, input_event.code, input_event.value);
+        }
     }
 }
 */</span>
-
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='comment'>//use ::events;</span>
+    <span class='comment'>//events::events();</span>
+    
     <span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>env</span>, <span class='ident'>thread</span>};
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>test_gradient</span> {
-        (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> ({
-            <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;testing gradient for {}::{}...&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>), <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>));
+        (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>hw</span>: <span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> ({
+            <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;testing gradient for {}...&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>));
             <span class='kw'>let</span> <span class='ident'>resolution</span> <span class='op'>=</span> <span class='number'>200.0</span>;
             <span class='comment'>//let mut g = Hw::new().$f().unwrap_or_else(|e| panic!(&quot;{}&quot;, e));</span>
             <span class='kw'>let</span> <span class='ident'>time</span> <span class='op'>=</span> <span class='number'>0.5</span>; <span class='comment'>//seconds</span>
             <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..(<span class='ident'>resolution</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>+</span><span class='number'>1</span>) { 
-                <span class='kw'>if</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>(((<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>f64</span><span class='op'>-</span>(<span class='ident'>resolution</span><span class='op'>/</span><span class='number'>2.0</span>)).<span class='ident'>abs</span>())<span class='op'>/</span><span class='number'>100.0</span>).<span class='ident'>is_err</span>() {
+                <span class='kw'>if</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>hw</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>(((<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>f64</span><span class='op'>-</span>(<span class='ident'>resolution</span><span class='op'>/</span><span class='number'>2.0</span>)).<span class='ident'>abs</span>())<span class='op'>/</span><span class='number'>100.0</span>).<span class='ident'>is_err</span>() {
                     <span class='kw'>break</span>;
                 }
                 <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>((<span class='ident'>time</span><span class='op'>*</span><span class='number'>1000.0</span><span class='op'>/</span><span class='ident'>resolution</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
@@ -546,15 +781,15 @@ pub fn events() {
     }
     
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>test_toggle</span> {
-        (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> ({
-            <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;toggling test for {}::{}/{}...&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>), <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>), <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>));
+        (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>hw</span>: <span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> ({
+            <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;toggling test for {}/{}...&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>), <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>));
             <span class='comment'>//let mut g = Hw::new().$f().unwrap_or_else(|e| panic!(&quot;{}&quot;, e));</span>
             <span class='kw'>loop</span> {
-                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} {}&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>), <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>));
-                <span class='kw'>if</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>().<span class='ident'>is_err</span>() {<span class='kw'>break</span>};
+                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>));
+                <span class='kw'>if</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>hw</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>off</span>().<span class='ident'>is_err</span>() {<span class='kw'>break</span>};
                 <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
-                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} {}&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>), <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>));
-                <span class='kw'>if</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>device</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>().<span class='ident'>is_err</span>() {<span class='kw'>break</span>};
+                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>));
+                <span class='kw'>if</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>hw</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>on</span>().<span class='ident'>is_err</span>() {<span class='kw'>break</span>};
                 <span class='kw'>break</span>;
             }
         })
@@ -562,19 +797,20 @@ pub fn events() {
     
     <span class='ident'>env</span>::<span class='ident'>set_var</span>(<span class='string'>&quot;HWLIB_ERROR_LOG&quot;</span>, <span class='string'>&quot;Y&quot;</span>);
     
-
-    <span class='macro'>test_gradient</span><span class='macro'>!</span>(<span class='ident'>Display</span>, <span class='ident'>brightness</span>);
-    <span class='macro'>test_gradient</span><span class='macro'>!</span>(<span class='ident'>Speaker</span>, <span class='ident'>volume</span>);
-    <span class='macro'>test_toggle</span><span class='macro'>!</span>(<span class='ident'>Display</span>, <span class='ident'>off</span>, <span class='ident'>on</span>);
-    <span class='macro'>test_toggle</span><span class='macro'>!</span>(<span class='ident'>Speaker</span>, <span class='ident'>mute</span>, <span class='ident'>unmute</span>);
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>hw</span> <span class='op'>=</span> <span class='ident'>Hw</span>::<span class='ident'>new</span>();
+    <span class='macro'>test_gradient</span><span class='macro'>!</span>(<span class='ident'>hw</span>, <span class='ident'>display_brightness</span>);
+    <span class='macro'>test_gradient</span><span class='macro'>!</span>(<span class='ident'>hw</span>, <span class='ident'>speaker_volume</span>);
+    <span class='macro'>test_toggle</span><span class='macro'>!</span>(<span class='ident'>hw</span>, <span class='ident'>display_off</span>, <span class='ident'>display_on</span>);
+    <span class='macro'>test_toggle</span><span class='macro'>!</span>(<span class='ident'>hw</span>, <span class='ident'>speaker_mute</span>, <span class='ident'>speaker_unmute</span>);
     
     
-    <span class='ident'>Speaker</span>::<span class='ident'>volume</span>(<span class='number'>0.5</span>).<span class='ident'>unwrap</span>();
+    <span class='ident'>hw</span>.<span class='ident'>display_brightness</span>(<span class='number'>1.0</span>).<span class='ident'>unwrap</span>();
+    <span class='ident'>hw</span>.<span class='ident'>speaker_volume</span>(<span class='number'>0.5</span>).<span class='ident'>unwrap</span>();
     
     <span class='comment'>/*
     println!(&quot;WARNING: Emergency power off in 2 secconds..&quot;);
     thread::sleep_ms(2000);
-    Hw::new().reboot();
+    Hw::new().power_off();
     println!(&quot;Couldn&#39;t reboot&quot;);
     */</span>
     

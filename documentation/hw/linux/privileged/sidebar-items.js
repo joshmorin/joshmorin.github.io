@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Display",""],["Keyboard",""],["Speaker",""],["System",""]]});
+initSidebarItems({});

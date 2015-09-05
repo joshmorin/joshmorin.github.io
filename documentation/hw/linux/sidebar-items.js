@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["privileged",""],["unprivileged",""]]});
+initSidebarItems({"struct":[["PlatformHw","(Linux) Platform-specific Hardware Handle"]]});

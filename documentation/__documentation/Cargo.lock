@@ -31,7 +31,7 @@ dependencies = [
 [[package]]
 name = "hw"
 version = "0.1.0"
-source = "git+https://joshmorin@bitbucket.org/joshmorin/hw.git#a3ccd8755b4cd022e3157f4ea341f92b675d8c19"
+source = "git+https://joshmorin@bitbucket.org/joshmorin/hw.git#7519a798083ceb8df2584979e63d953b4f0bf61b"
 dependencies = [
  "libc 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
 ]

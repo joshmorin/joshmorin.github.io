@@ -45,22 +45,25 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/hw/lib.rs.html#20-269' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/hw/lib.rs.html#20-387' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><pre class='rust rust-example-rendered'>
 
 <span class='kw'>use</span> <span class='ident'>hw</span>;
 
 
 <span class='comment'>// Sets display brightness to 60%</span>
-<span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>hw</span>::<span class='ident'>Display</span>::<span class='ident'>brightness</span>(<span class='number'>0.6</span>);
+<span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>hw</span>::<span class='ident'>display_brightness</span>(<span class='number'>0.6</span>);
 
 <span class='comment'>// Mutes the systems speaker or connected headphone.</span>
-<span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>hw</span>::<span class='ident'>Speaker</span>::<span class='ident'>unmute</span>();
+<span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>hw</span>::<span class='ident'>speaker_unmute</span>();
 
 <span class='comment'>// Shutdown via a shutdown signal to the host operating system</span>
-<span class='comment'>//let _ = hw::System::shutdown();</span>
+<span class='comment'>//let _ = hw::power_shutdown();</span>
  
 </pre>
+
+<p>Crate level functions (<code>display_brightness</code>, <code>speaker_unmute</code>, and 
+<code>power_shutdown</code>) are simple wrappers around their <code>Hw</code> equivalents.</p>
 
 <h2 id="environment-variables" class='section-header'><a
                            href="#environment-variables">ENVIRONMENT VARIABLES</a></h2>
@@ -70,34 +73,8 @@
 <li>Additional environment variables may be significant on some platforms. 
 refer to the <code>privilege</code> and <code>unprivileged</code> modules for further details.</li>
 </ol>
-</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='mod' href='privileged/index.html'
-                               title='hw::privileged'>privileged</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='mod' href='unprivileged/index.html'
-                               title='hw::unprivileged'>unprivileged</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Display.html'
-                               title='hw::Display'>Display</a></td>
-                        <td class='docblock short'>
-                             <p>System Video Output Handle</p>
-
-                        </td>
-                    </tr>
-                
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Error.html'
                                title='hw::Error'>Error</a></td>
@@ -108,19 +85,19 @@ refer to the <code>privilege</code> and <code>unprivileged</code> modules for fu
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Speaker.html'
-                               title='hw::Speaker'>Speaker</a></td>
+                        <td><a class='struct' href='struct.Hw.html'
+                               title='hw::Hw'>Hw</a></td>
                         <td class='docblock short'>
-                             <p>System Audio Output Handle</p>
+                             <p>Hardware Handle</p>
 
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='struct' href='struct.System.html'
-                               title='hw::System'>System</a></td>
+                        <td><a class='struct' href='struct.PlatformHw.html'
+                               title='hw::PlatformHw'>PlatformHw</a></td>
                         <td class='docblock short'>
-                             <p>System Handle</p>
+                             <p>(Linux) Platform-specific Hardware Handle</p>
 
                         </td>
                     </tr>
@@ -131,6 +108,97 @@ refer to the <code>privilege</code> and <code>unprivileged</code> modules for fu
                                title='hw::ErrorKind'>ErrorKind</a></td>
                         <td class='docblock short'>
                              <p>Error Kind</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.display_brightness.html'
+                               title='hw::display_brightness'>display_brightness</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.display_off.html'
+                               title='hw::display_off'>display_off</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.display_on.html'
+                               title='hw::display_on'>display_on</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.power_off.html'
+                               title='hw::power_off'>power_off</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.power_reboot.html'
+                               title='hw::power_reboot'>power_reboot</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.power_restart.html'
+                               title='hw::power_restart'>power_restart</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.power_shutdown.html'
+                               title='hw::power_shutdown'>power_shutdown</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.speaker_mute.html'
+                               title='hw::speaker_mute'>speaker_mute</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.speaker_unmute.html'
+                               title='hw::speaker_unmute'>speaker_unmute</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.speaker_volume.html'
+                               title='hw::speaker_volume'>speaker_volume</a></td>
+                        <td class='docblock short'>
+                             <p>See <code>Hw</code></p>
 
                         </td>
                     </tr>

@@ -223,17 +223,10 @@
 <span id="181">181</span>
 <span id="182">182</span>
 <span id="183">183</span>
-<span id="184">184</span>
-<span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
-<span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
 </pre><pre class='rust '>
 <span class='comment'>// https://www.kernel.org/doc/Documentation/input/input.txt</span>
+<span class='comment'>// https://www.kernel.org/doc/Documentation/input/event-codes.txt</span>
+<span class='comment'>// file:///usr/include/linux/input.h</span>
 <span class='comment'>// https://www.kernel.org/doc/Documentation/ABI/stable/sysfs-class-backlight</span>
 
 <span class='doccomment'>//!</span>
@@ -242,6 +235,7 @@
 <span class='doccomment'>//! by name (as it appears in sysfs).</span>
 
 <span class='kw'>use</span> ::<span class='ident'>error</span>::{<span class='prelude-ty'>Result</span>, <span class='ident'>Error</span>};
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>PlatformHw</span>;
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>exec</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>expr</span> ),<span class='op'>*</span>) <span class='op'>=&gt;</span> ({
@@ -250,68 +244,56 @@
     })
 }
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>System</span>;
-<span class='kw'>impl</span> <span class='ident'>System</span> {
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_off</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>use</span> ::<span class='ident'>linux</span>::<span class='ident'>io</span>::<span class='ident'>write_line</span>;
-        <span class='kw'>let</span> <span class='ident'>err</span> <span class='op'>=</span> <span class='ident'>write_line</span>(<span class='string'>&quot;/proc/sysrq-trigger&quot;</span>, <span class='string'>&quot;o&quot;</span>).<span class='ident'>err</span>().<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> <span class='macro'>unreachable</span><span class='macro'>!</span>());
-        <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Powering the system off&quot;</span>, <span class='string'>&quot;Could not power system off using /proc/sysrq-trigger: {}&quot;</span>, <span class='ident'>err</span>);
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_off</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>use</span> ::<span class='ident'>linux</span>::<span class='ident'>io</span>::<span class='ident'>write_line</span>;
+    <span class='kw'>let</span> <span class='ident'>err</span> <span class='op'>=</span> <span class='ident'>write_line</span>(<span class='string'>&quot;/proc/sysrq-trigger&quot;</span>, <span class='string'>&quot;o&quot;</span>).<span class='ident'>err</span>().<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> <span class='macro'>unreachable</span><span class='macro'>!</span>());
+    <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Powering the system off&quot;</span>, <span class='string'>&quot;Could not power system off using /proc/sysrq-trigger: {}&quot;</span>, <span class='ident'>err</span>);
+}
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_reboot</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>use</span> ::<span class='ident'>linux</span>::<span class='ident'>io</span>::<span class='ident'>write_line</span>;
+    <span class='kw'>let</span> <span class='ident'>err</span> <span class='op'>=</span> <span class='ident'>write_line</span>(<span class='string'>&quot;/proc/sysrq-trigger&quot;</span>, <span class='string'>&quot;b&quot;</span>).<span class='ident'>err</span>().<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> <span class='macro'>unreachable</span><span class='macro'>!</span>());
+    <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Rebooting the system&quot;</span>, <span class='string'>&quot;Could not restart system using /proc/sysrq-trigger: {}&quot;</span>, <span class='ident'>err</span>);
+}
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_shutdown</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown&quot;</span>, <span class='string'>&quot;-h&quot;</span>, <span class='string'>&quot;0&quot;</span>) {
+        <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
+        <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Shutdown&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
     }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>reboot</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>use</span> ::<span class='ident'>linux</span>::<span class='ident'>io</span>::<span class='ident'>write_line</span>;
-        <span class='kw'>let</span> <span class='ident'>err</span> <span class='op'>=</span> <span class='ident'>write_line</span>(<span class='string'>&quot;/proc/sysrq-trigger&quot;</span>, <span class='string'>&quot;b&quot;</span>).<span class='ident'>err</span>().<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> <span class='macro'>unreachable</span><span class='macro'>!</span>());
-        <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Rebooting the system&quot;</span>, <span class='string'>&quot;Could not restart system using /proc/sysrq-trigger: {}&quot;</span>, <span class='ident'>err</span>);
-    }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>shutdown</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown&quot;</span>, <span class='string'>&quot;-h&quot;</span>, <span class='string'>&quot;0&quot;</span>) {
-            <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Shutdown&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
-        }
-    }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>restart</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown&quot;</span>, <span class='string'>&quot;-r&quot;</span>, <span class='string'>&quot;0&quot;</span>) {
-            <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Shutdown&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
-        }
+}
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>power_restart</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown&quot;</span>, <span class='string'>&quot;-r&quot;</span>, <span class='string'>&quot;0&quot;</span>) {
+        <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
+        <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Shutdown&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
     }
 }
 
 
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Speaker</span>;
-<span class='kw'>impl</span> <span class='ident'>Speaker</span> {
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>volume</span>(_: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>unsupported</span>(<span class='string'>&quot;Privileged audio level adjustment&quot;</span>))}
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>mute</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>unsupported</span>(<span class='string'>&quot;Privileged speaker mute&quot;</span>))}
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>unmute</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>unsupported</span>(<span class='string'>&quot;Privileged speaker unmute&quot;</span>))}
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>speaker_volume</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>, _: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>unsupported</span>(<span class='string'>&quot;Privileged audio level adjustment&quot;</span>))}
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>speaker_mute</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>)           <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>unsupported</span>(<span class='string'>&quot;Privileged speaker mute&quot;</span>))}
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>speaker_unmute</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>)         <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>unsupported</span>(<span class='string'>&quot;Privileged speaker unmute&quot;</span>))}
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>display_brightness</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>, <span class='ident'>intensity</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='ident'>linux_sysfs_class_backlight_intensity</span>(<span class='prelude-val'>None</span>, <span class='ident'>intensity</span>)
 }
-
-
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Display</span>;
-<span class='kw'>impl</span> <span class='ident'>Display</span> {
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>brightness</span>(<span class='ident'>intensity</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='ident'>linux_sysfs_class_backlight_intensity</span>(<span class='prelude-val'>None</span>, <span class='ident'>intensity</span>)
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>display_off</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;vbetool&quot;</span>, <span class='string'>&quot;dpms&quot;</span>, <span class='string'>&quot;off&quot;</span>) {
+        <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
+        <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Suspending the desplay&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
     }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>off</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;vbetool&quot;</span>, <span class='string'>&quot;dpms&quot;</span>, <span class='string'>&quot;off&quot;</span>) {
-            <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Suspending the desplay&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
-        }
-        
-    }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>on</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;vbetool&quot;</span>, <span class='string'>&quot;dpms&quot;</span>, <span class='string'>&quot;on&quot;</span>) {
-            <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Suspending the desplay&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
-        }
+    
+}
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>display_on</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PlatformHw</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>match</span> <span class='macro'>exec</span><span class='macro'>!</span>(<span class='string'>&quot;vbetool&quot;</span>, <span class='string'>&quot;dpms&quot;</span>, <span class='string'>&quot;on&quot;</span>) {
+        <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
+        <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='macro'>log_n_ret</span><span class='macro'>!</span>(<span class='string'>&quot;Suspending the desplay&quot;</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>)
     }
 }
 
-
-
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Keyboard</span>;
 
 
 <span class='comment'>// Control the brightness of a backlight.</span>

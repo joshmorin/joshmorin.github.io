@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Hw` struct in crate `hw`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Hw">
+
+    <title>hw::Hw - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>hw</a></p><script>window.sidebarCurrent = {name: 'Hw', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>hw</a>::<wbr><a class='struct' href=''>Hw</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-4304' class='srclink' href='../src/hw/lib.rs.html#109' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Hw(_);</pre><div class='docblock'><p>Hardware Handle</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../hw/struct.Hw.html' title='hw::Hw'>Hw</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../hw/struct.Hw.html' title='hw::Hw'>Hw</a></code></h4>
+<div class='docblock'><p>Return a new hardware handle.</p>
+</div><h4 id='method.power_off' class='method'><code>fn <a href='#method.power_off' class='fnname'>power_off</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Immediate system power off.</p>
+
+<p><strong>Warning:</strong> May cause data loss and other undesirable side-effects associated with
+an &quot;Unclean&quot; shutdown. Consider <code>System::shutdown</code> if this is 
+undesirable.</p>
+</div><h4 id='method.power_reboot' class='method'><code>fn <a href='#method.power_reboot' class='fnname'>power_reboot</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Immediate system reboot.</p>
+
+<p><strong>Warning:</strong> May cause data loss and other undesirable side-effects associated with
+an &quot;Unclean&quot; shutdown. Consider <code>System::restart</code> if this is 
+undesirable.</p>
+</div><h4 id='method.power_shutdown' class='method'><code>fn <a href='#method.power_shutdown' class='fnname'>power_shutdown</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sends the shutdown signal for an operating system-assisted power off.</p>
+
+<p>Exact behavior is system-dependent, and may entail additional user action 
+(confirmation). Successful result may not imply successful shutdown 
+initiation.</p>
+</div><h4 id='method.power_restart' class='method'><code>fn <a href='#method.power_restart' class='fnname'>power_restart</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sends the restart signal for an operating system-assisted reboot.</p>
+
+<p>Exact behavior is system-dependent, and may entail additional user action 
+(confirmation). Successful result may not imply successful shutdown 
+initiation.</p>
+</div><h4 id='method.speaker_volume' class='method'><code>fn <a href='#method.speaker_volume' class='fnname'>speaker_volume</a>(&amp;mut self, level: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sets system audio output volume to a specified level. <code>level</code> range
+must be a value either 0.0 (min), 1.0 (max), or any value in between. </p>
+</div><h4 id='method.speaker_mute' class='method'><code>fn <a href='#method.speaker_mute' class='fnname'>speaker_mute</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Mutes system audio output</p>
+</div><h4 id='method.speaker_unmute' class='method'><code>fn <a href='#method.speaker_unmute' class='fnname'>speaker_unmute</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Unmutes system audio output</p>
+</div><h4 id='method.display_brightness' class='method'><code>fn <a href='#method.display_brightness' class='fnname'>display_brightness</a>(&amp;mut self, intensity: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sets all system video output brightness to a specified intensity.
+<code>intensity</code> range must be a value either 0.0 (min), 1.0 (max), 
+or any value in between. </p>
+</div><h4 id='method.display_off' class='method'><code>fn <a href='#method.display_off' class='fnname'>display_off</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Turns off all video output for the system.</p>
+</div><h4 id='method.display_on' class='method'><code>fn <a href='#method.display_on' class='fnname'>display_on</a>(&amp;mut self) -&gt; <a class='type' href='../hw/type.Result.html' title='hw::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Turns on all video output for the system.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../hw/struct.Hw.html' title='hw::Hw'>Hw</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "hw";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
